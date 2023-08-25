@@ -15,7 +15,6 @@ export const RecipeList = () => {
       {data.hits.map((item) => (
         <RecipeCard key={item.recipe.label} item={item} />
       ))}
-      ;
     </Box>
   );
 };
