@@ -1,6 +1,11 @@
-import { RecipeListPage } from './pages/RecipeListPage';
+import { RecipeListPage } from "./pages/RecipeListPage";
+import Layout from "./components/Layout";
 
 export const App = () => {
   // Your state code here
-  return <RecipeListPage />;
+  return (
+    <Layout>
+      <RecipeListPage />
+    </Layout>
+  );
 };

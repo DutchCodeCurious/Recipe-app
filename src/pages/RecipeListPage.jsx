@@ -1,13 +1,19 @@
-import { Center, Heading } from '@chakra-ui/react';
-import { data } from '../utils/data';
+import { Center, Heading, Box } from "@chakra-ui/react";
+import { RecipeList } from "../components/RecipeList";
 
 export const RecipeListPage = () => {
   // You can play around with the console log, but ultimately remove it once you are done
-  console.log(data.hits[0].recipe.label);
+  // console.log(data.hits[0].recipe.label);
+  // data.hits.map((item) => {
+  //  console.log(item.recipe.label);
+  //});
 
   return (
     <Center h="100vh" flexDir="column">
-      <Heading>Your Recipe App</Heading>
+      <Box>
+        <Heading>Hier staan dingen!!</Heading>
+      </Box>
+      <RecipeList />
     </Center>
   );
 };
