@@ -1,6 +1,5 @@
 import { Box, Text, Image, Tag, TagLabel, Flex } from "@chakra-ui/react";
-
-export const RecipeCard = ({ item }) => {
+export const RecipeCard = ({ item, clickFn }) => {
   const cardStyle = {
     borderWidth: "1px",
     borderRadius: "lg",
@@ -10,6 +9,7 @@ export const RecipeCard = ({ item }) => {
     mb: "4",
     h: "400px",
     w: "250px",
+    margin: "4px",
   };
 
   const imgContainerStyle = {
@@ -30,11 +30,22 @@ export const RecipeCard = ({ item }) => {
     h: "100%",
   };
   return (
-    <Box key={item.recipe.label} {...cardStyle}>
+    <Box
+      key={item.recipe.label}
+      {...cardStyle}
+      onClick={clickFn}
+      cursor={"pointer"}
+    >
       <Box {...imgContainerStyle}>
         <Image src={item.recipe.image} {...imgStyle} />
       </Box>
+      {item.recipe.healthLabels.includes("Vegan") ? (
+        <Tag bg={"green"}>Vegan</Tag>
+      ) : (
+        <></>
+      )}
       <Text>{item.recipe.mealType}</Text>
+      <Text>{item.recipe.label}</Text>
       <Flex flexWrap="wrap" p="4" mt="auto" mb="1">
         {item.recipe.dietLabels.map((lb) => (
           <Tag key={lb} mr="2" mb="1">

@@ -1,19 +1,32 @@
-import { Box, Icon } from "@chakra-ui/react";
+import { Box, Icon, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { data } from "../../utils/data";
+import { VStack } from "@chakra-ui/react";
 
-const Sidebar = () => {
+const Sidebar = ({ onTagClick }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const handleTagClick = (healthlabel) => {
+    onTagClick(healthlabel);
+  };
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
 
+  const uniqueHealthLabels = new Set();
+  data.hits.forEach((recipe) => {
+    recipe.recipe.healthLabels.forEach((healthlabel) =>
+      uniqueHealthLabels.add(healthlabel)
+    );
+  });
+
   return (
     <Box
       float={"left"}
       w={isCollapsed ? "60px" : "250px"}
-      h="100vh"
+      h="100%"
       bg="gray.800"
       color="white"
       p={4}
@@ -31,7 +44,26 @@ const Sidebar = () => {
           cursor={"pointer"}
         />
       </Box>
-      {/* Voeg hier de tags, soorten eten toe */}
+      <VStack spacing={2} float={"left"}>
+        {Array.from(uniqueHealthLabels).map((health) => (
+          <Button
+            visibility={isCollapsed ? "hidden" : "none"}
+            bg=""
+            size="xs"
+            colorScheme="teal"
+            variant="solid"
+            value={health}
+            key={health}
+            cursor={"pointer"}
+            onClick={() => handleTagClick(health)}
+            _focus={{
+              bg: "green",
+            }}
+          >
+            {health}
+          </Button>
+        ))}
+      </VStack>
     </Box>
   );
 };
