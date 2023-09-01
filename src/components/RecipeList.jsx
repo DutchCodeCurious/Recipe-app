@@ -13,7 +13,6 @@ export const RecipeList = ({ selectedTag }) => {
 
   const handleBoxChange = (value) => {
     setSelectedBox(value);
-    console.log(selectedBox);
   };
 
   const openModal = (item) => {
@@ -34,20 +33,31 @@ export const RecipeList = ({ selectedTag }) => {
     setInputValue(event.target.value);
   };
 
-  const filteredItems = data.hits.filter(
-    (recipe) =>
-      (selectedBox === "" || recipe.recipe.mealType.includes(selectedBox)) &&
-      (selectedTag === "" ||
-        recipe.recipe.healthLabels.includes(selectedTag)) &&
-      (inputValue === "" ||
-        recipe.recipe.label
-          .toLowerCase()
-          .includes(
-            inputValue.toLowerCase() ||
-              recipe.recipe.healthLabels
-                .toLowerCase()
-                .includes(inputValue.toLowerCase())
-          ))
+  function filterItem(item, selectedBox, selectedTag, inputValue) {
+    const { recipe } = item;
+
+    if (!recipe || !recipe.mealType || !recipe.healthLabels || !recipe.label) {
+      return false;
+    }
+
+    const boxCondition =
+      selectedBox === "" || recipe.mealType.includes(selectedBox);
+
+    const tagCondition =
+      selectedTag === "" || recipe.healthLabels.includes(selectedTag);
+
+    const inputValueCondition =
+      inputValue === "" ||
+      recipe.label.toLowerCase().includes(inputValue.toLowerCase()) ||
+      recipe.healthLabels.some((label) =>
+        label.toLowerCase().includes(inputValue.toLowerCase())
+      );
+
+    return boxCondition && tagCondition && inputValueCondition;
+  }
+
+  const filteredItems = data.hits.filter((item) =>
+    filterItem(item, selectedBox, selectedTag, inputValue)
   );
 
   const listStyle = {
@@ -89,16 +99,6 @@ export const RecipeList = ({ selectedTag }) => {
           clickFn={() => openModal(item)}
         />
       ))}
-
-      {inputValue === "" &&
-        selectedBox === "" &&
-        data.hits.map((item) => (
-          <RecipeCard
-            key={item.recipe.label}
-            item={item}
-            clickFn={() => openModal(item)}
-          />
-        ))}
       {selectedItem !== null && (
         <RecipeModal
           isOpen={isModalOpen}

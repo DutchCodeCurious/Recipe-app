@@ -1,10 +1,8 @@
-import { Center } from "@chakra-ui/react";
 import { RecipeList } from "../components/RecipeList";
 import Layout from "../components/Layout";
 import { useState } from "react";
-export const RecipeListPage = () => {
+export const Home = () => {
   const [selectedTag, setSelectedTag] = useState("");
-  const listStyle = {};
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
@@ -12,9 +10,7 @@ export const RecipeListPage = () => {
 
   return (
     <Layout onTagClick={handleTagClick}>
-      <Center {...listStyle}>
-        <RecipeList selectedTag={selectedTag} />
-      </Center>
+      <RecipeList selectedTag={selectedTag} />
     </Layout>
   );
 };

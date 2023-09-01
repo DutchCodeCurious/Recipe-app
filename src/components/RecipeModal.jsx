@@ -14,15 +14,26 @@ import {
   TagLabel,
   Image,
 } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const RecipeModal = ({ isOpen, onClose, item }) => {
-  console.log(item);
+  const [recipe, setRecipe] = useState(item);
+  const handleLinkClick = () => {
+    setRecipe(item);
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{item.recipe.label}</ModalHeader>
         <ModalCloseButton />
+        <Link to={`/recipes/${item.recipe.label}`} state={{ recipe: recipe }}>
+          <Button onClick={handleLinkClick}>
+            Full Recipe: {item.recipe.label}
+          </Button>
+        </Link>
         <ModalBody>
           <Text>{item.recipe.mealType}</Text>
           <Text>{item.recipe.dishType}</Text>

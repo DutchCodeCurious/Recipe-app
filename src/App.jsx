@@ -1,10 +1,9 @@
-import { RecipeListPage } from "./pages/RecipeListPage";
+import { Home } from "./pages/Home";
 
 export const App = () => {
-  // Your state code here
   return (
     <>
-      <RecipeListPage />
+      <Home />
     </>
   );
 };

@@ -603,7 +603,7 @@ export const data = JSON.parse(`{
           }
         }
       }
-    },
+       },
     {
       "recipe": {
         "label": "Slow Cooker Turkey Dip Sandwiches recipes",
@@ -6554,7 +6554,6 @@ export const data = JSON.parse(`{
           "italian"
         ],
         "mealType": [
-          "snack",
           "lunch/dinner"
         ],
         "dishType": [

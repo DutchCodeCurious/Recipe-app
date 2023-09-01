@@ -44,10 +44,25 @@ const Sidebar = ({ onTagClick }) => {
           cursor={"pointer"}
         />
       </Box>
-      <VStack spacing={2} float={"left"}>
+      <VStack
+        spacing={2}
+        float={"left"}
+        visibility={isCollapsed ? "hidden" : "none"}
+      >
+        <Button
+          float="left"
+          bg="white"
+          color={"black"}
+          size="xs"
+          colorScheme="teal"
+          variant="solid"
+          cursor={"pointer"}
+          onClick={() => handleTagClick("")}
+        >
+          Reset
+        </Button>
         {Array.from(uniqueHealthLabels).map((health) => (
           <Button
-            visibility={isCollapsed ? "hidden" : "none"}
             bg=""
             size="xs"
             colorScheme="teal"

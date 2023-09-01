@@ -39,11 +39,20 @@ export const RecipeCard = ({ item, clickFn }) => {
       <Box {...imgContainerStyle}>
         <Image src={item.recipe.image} {...imgStyle} />
       </Box>
-      {item.recipe.healthLabels.includes("Vegan") ? (
-        <Tag bg={"green"}>Vegan</Tag>
-      ) : (
-        <></>
-      )}
+      <Flex align={"center"}>
+        {item.recipe.healthLabels.includes("Vegan") ? (
+          <Tag bg={"green"} margin={"1"}>
+            Vegan
+          </Tag>
+        ) : (
+          <></>
+        )}
+        {item.recipe.healthLabels.includes("Vegetarian") ? (
+          <Tag bg={"green"}>Vegetarian</Tag>
+        ) : (
+          <></>
+        )}
+      </Flex>
       <Text>{item.recipe.mealType}</Text>
       <Text>{item.recipe.label}</Text>
       <Flex flexWrap="wrap" p="4" mt="auto" mb="1">
