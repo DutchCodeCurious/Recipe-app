@@ -1,9 +1,9 @@
 import { Box, Flex, Input } from "@chakra-ui/react";
 import { data } from "../utils/data";
-import { RecipeCard } from "./ui/RecipeCard";
 import { useState } from "react";
 import RecipeModal from "./RecipeModal";
 import { Radio, RadioGroup, HStack } from "@chakra-ui/react";
+import { CardDesign } from "./ui/CardDesign";
 
 export const RecipeList = ({ selectedTag }) => {
   const [inputValue, setInputValue] = useState("");
@@ -70,7 +70,7 @@ export const RecipeList = ({ selectedTag }) => {
 
   return (
     <Box {...listStyle}>
-      <Flex width="100%" align="center">
+      <Flex width="100%" align="center" justifyContent={"center"}>
         <Input
           width="40%"
           type="text"
@@ -92,20 +92,27 @@ export const RecipeList = ({ selectedTag }) => {
           </HStack>
         </RadioGroup>
       </Flex>
-      {filteredItems.map((item) => (
-        <RecipeCard
-          key={item.recipe.label}
-          item={item}
-          clickFn={() => openModal(item)}
-        />
-      ))}
-      {selectedItem !== null && (
-        <RecipeModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          item={selectedItem}
-        />
-      )}
+      <Box
+        alignItems={"center"}
+        display={"flex"}
+        flexWrap={"wrap"}
+        justifyContent={"center"}
+      >
+        {filteredItems.map((item) => (
+          <CardDesign
+            key={item.recipe.label}
+            item={item}
+            clickFn={() => openModal(item)}
+          />
+        ))}
+        {selectedItem !== null && (
+          <RecipeModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            item={selectedItem}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

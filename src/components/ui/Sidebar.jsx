@@ -5,7 +5,7 @@ import { data } from "../../utils/data";
 import { VStack } from "@chakra-ui/react";
 
 const Sidebar = ({ onTagClick }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleTagClick = (healthlabel) => {
     onTagClick(healthlabel);

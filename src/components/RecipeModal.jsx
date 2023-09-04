@@ -29,7 +29,7 @@ const RecipeModal = ({ isOpen, onClose, item }) => {
       <ModalContent>
         <ModalHeader>{item.recipe.label}</ModalHeader>
         <ModalCloseButton />
-        <Link to={`/recipes/${item.recipe.label}`} state={{ recipe: recipe }}>
+        <Link to={`/layout/${item.recipe.label}`} state={{ recipe: recipe }}>
           <Button onClick={handleLinkClick}>
             Full Recipe: {item.recipe.label}
           </Button>
